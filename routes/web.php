@@ -1,7 +1,10 @@
 <?php
 
+use Google\Client;
+use Illuminate\Http\Request;
+use Revolution\Google\Sheets\Sheets;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\SpreadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +16,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [SpreadController::class, 'index']);
+Route::get('/qr-code', [SpreadController::class, 'qrCode']);

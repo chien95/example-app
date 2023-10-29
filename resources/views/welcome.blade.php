@@ -366,7 +366,7 @@
                                                         <div class="maxlength-1 info_listedPrice__2Emnt">(Giá niêm yết)</div>
                                                     </div>
                                                     <div class="info_priceProduct__3710U"  style="justify-content: center;margin-bottom:15px ">
-                                                        <div style="color: #006dff;font-weight: 500;">Serial: LA1-097461</div>
+                                                        <div style="color: #006dff;font-weight: 500;">Serial: {{ data_get($rows, 'prefix') }}-{{ data_get($rows, 'suffix') }}</div>
                                                     </div>
                                                     {{-- <div class="info_rateOrBuy__9vrnl">
                                                         <div class="info_btnRate__AcNog">

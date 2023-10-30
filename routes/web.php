@@ -16,5 +16,7 @@ use App\Http\Controllers\SpreadController;
 |
 */
 
-Route::get('/', [SpreadController::class, 'index']);
+Route::get('/landing', [SpreadController::class, 'index']);
+Route::get('/', [SpreadController::class, 'landing']);
+Route::get('/images/{media}', [SpreadController::class, 'media']);
 Route::get('/qr-code', [SpreadController::class, 'qrCode']);

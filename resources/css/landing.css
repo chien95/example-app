@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.pdf-icon {
+    font-size: 100%;
+    width: 5.5em;
+    height: 7.5em;
+    background-color: #eee;
+    background-repeat: no-repeat;
+    background-size: 55% auto;
+    background-position: center 2em;
+    border-radius: 1px 0.8em 1px 1px;
+    border: 1px solid #ddd;
+}
+
+.pdf-icon::after {
+    content: 'PDF';
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 10px;
+    text-align: center;
+    padding: .2em 0 .1em;
+    color: white;
+    display: block;
+    position: absolute;
+    top: .7em;
+    left: -1.5em;
+    width: 3.4em;
+    height: auto;
+    background: #da2525;
+    border-radius: 2px;
+}
+   

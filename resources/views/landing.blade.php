@@ -8,7 +8,7 @@
     @vite(['resources/css/landing.css'])
 </head>
 <body>
-    <div class="bg-hero-pattern">
+    <div class="bg-hero-pattern md:max-w-xl md:m-auto md:border" style="background-image: url(./image/background_layout.png);">
         <div class="flex justify-center py-5 px-5">
             <img class="" src="{{ asset('image/211ca5105d866814a9b29199d2f08404.webp') }}">
         </div>
@@ -30,6 +30,23 @@
         <div class="bg-white mb-3 py-3 px-3 flex justify-center">
             <div class="font-semibold text-blue-700 text-base">Serial: {{ data_get($rows, 'prefix') }}-{{ data_get($rows, 'suffix') }}</div>
         </div>
+
+        <div class="bg-white mb-3 py-3 px-3 flex flex-row">
+            <div class="w-6/12 border-r flex justify-center">
+                <img class="w-6" src="{{ asset('image/qr_code.svg') }}"> 
+                <div class="ml-2 text-center text-sm">
+                    <p class="font-bold text-blue-700 ">1</p>
+                    <p>Số lần quét</p>
+                </div>
+            </div>
+            <div class="w-6/12 border-l flex justify-center">
+                <img class="w-6" src="{{ asset('image/view_user.svg') }}"> 
+                <div class="ml-2 text-center text-sm">
+                    <p class="font-bold text-blue-700 ">0</p>
+                    <p>Số người quét</p>
+                </div>
+            </div>
+        </div>
         <div class="bg-white mb-3">
             <div class="bg-blue-500 text-white flex py-3 px-3 mb-3">
                  <div class="bg-white rounded self-baseline w-12">
@@ -44,10 +61,10 @@
                 </div>
             </div>
             <div class="px-3 text-sm font-semibold">
-                <p class="pb-3  flex"> 
-                    <img class="w-2 self-start pt-1.5" src="{{ asset('image/next.svg') }}">
-                    <a href="tel:0355527829" class="ml-3">0355527829</a> 
-                </p>
+                <!--<p class="pb-3  flex"> -->
+                <!--    <img class="w-2 self-start pt-1.5" src="{{ asset('image/next.svg') }}">-->
+                <!--    <a href="tel:0355527829" class="ml-3">0355527829</a> -->
+                <!--</p>-->
                 <p class="pb-3 flex">
                     <img class="w-2 self-start pt-1.5" src="{{ asset('image/next.svg') }}">
                     <span class="ml-3">Số 138/29/21 Y Ngông, Phường Tân Tiến, Thành phố Buôn Ma Thuột, Tỉnh Đắk Lắk, Việt Nam</span>
@@ -57,7 +74,7 @@
 
         <div class="bg-white mb-3 py-3 px-3">
             <h2 class="text-blue-800 text-sm font-semibold mb-2">Chứng chỉ và chứng nhận</h2>
-            <span class="ml-3 relative block bg-gray-50 pdf-icon bg-pdf"></span>
+            <span class="ml-3 relative block bg-gray-50 pdf-icon bg-pdf" style="background-image: url(./image/lZ5SgDE.png)"></span>
         </div>
 
         <div class="bg-white mb-3">
@@ -99,13 +116,14 @@
                 </p>
                 <p>
                     <b><u>*</u> Cách sử dụng tinh dầu lợi an cho người lớn bị ho.</b> <br>
-                    Há miệng ra dùng ngon tay chấm tinh dầu bôi sâu vào trong họng của mình 4 đến 5 lần trong ngày. Sau khi bôi xong kiêng ăn uống sau 20 phút. - Lưu ý không sử dụng cho phụ nữ mang thai. - Không dùng tinh dầu nhỏ vào mũi hay mắt của con.
+                    Há miệng ra dùng ngon tay chấm tinh dầu bôi sâu vào trong họng của mình 4 đến 5 lần trong ngày. Sau khi bôi xong kiêng ăn uống sau 20 phút. <br>
+                        - Không sử dụng cho phụ nữ mang thai. <br>
+                        - Không dùng tinh dầu nhỏ vào mũi hay mắt của con. 
                 </p>
-                <p><b><u>* Lưu ý</u>:  Nếu trường hợp bị đổ tinh dầu vào mũi hay mắt của con mẹ dùng miệng xử lý hút ngay mũi cho con và rửa mũi và mắt của con bằng nước muối sinh lý.</b></p> <br>
+                <p><b><u>* </u>Lưu ý:  Nếu trường hợp bị đổ tinh dầu vào mũi hay mắt của con mẹ dùng miệng xử lý hút ngay mũi cho con và rửa mũi và mắt của con bằng nước muối sinh lý.</b></p> <br>
                 <p class="underline ">Bảo quản: Nơi thoáng mát, tránh xa tầm tay trẻ em</p>
             </div>
         </div>
-        <div></div>
     </div>
 </body>
 </html>

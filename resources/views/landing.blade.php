@@ -103,7 +103,13 @@
         <div class="bg-white mb-3 py-3 px-3">
             <h2 class="text-blue-800 text-base font-semibold mb-2">Mô tả sản phẩm tinh dầu lợi an</h2>
             <div class="text-sm">
-                <p><b><u>*</u> Thành phần:</b><span> Trầu không (Piper betle) Màng tang (Litsea cubeba) Quế chi (Ramulus Cinnamoni) Long não (Cinnamomum camphora) Tràm (Melaleuca)…</span></p>
+                <p><b><u>*</u> Thành phần:</b><span> <br>
+                    - Trầu không (Piper betle) <br>
+                    - Màng tang (Litsea cubeba) <br>
+                    - Quế chi (Ramulus Cinnamoni) <br>
+                    - Long não (Cinnamomum camphora) <br>
+                    - Tràm (Melaleuca)…
+                </span></p>
                 <p><b>Xoa tinh dầu trong 10 phút để đạt hiệu quả tốt nhất.</b></p>
                 <p><b><u>*</u> Công dụng:</b> Đặc trị ho đờm. Ho viêm phế quản. Ho cảm lạnh. Sổ mũi. Khò khè. Ngạt mũi. Mũi xanh mũi đặc.</p>
                 <p><b><u>*</u> Cách dùng:</b> Lấy tăm bông ( cuộn thêm bông vào que tăm bông để tích được tinh dầu ) sau đó chấm vào lọ tinh dầu. Chấm bôi vào 2 vành trong lỗ mũi. Trán. Thái dương. Cổ lưng lòng bàn chân của bé. 3 đến 4 lần 1 ngày.</p>

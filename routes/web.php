@@ -15,8 +15,5 @@ use App\Http\Controllers\SpreadController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/landing', [SpreadController::class, 'index']);
-Route::get('/', [SpreadController::class, 'landing']);
-Route::get('/images/{media}', [SpreadController::class, 'media']);
 Route::get('/qr-code', [SpreadController::class, 'qrCode']);
+Route::get('/{code?}', [SpreadController::class, 'index']);

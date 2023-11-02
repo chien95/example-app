@@ -9,35 +9,24 @@ use Revolution\Google\Sheets\Facades\Sheets;
 
 class SpreadController extends Controller
 {
-    public function index()
+    public function index($code = null)
     {
-        $rows = Sheets::spreadsheet('1zsFYBrzDKkXdp4FGdxKM1e0DrK1jyaNAyTEAu8cY_EY')->sheet('Serial Numbers')->get();
-        $values = Sheets::collection(header: array_map('strtolower', $rows->pull(0)), rows: $rows)->random();
-        return view('welcome', ['rows' => $values]);
-    }
-
-    public function landing()
-    {
-        $rows = Sheets::spreadsheet('1zsFYBrzDKkXdp4FGdxKM1e0DrK1jyaNAyTEAu8cY_EY')->sheet('Serial Numbers')->get();
-        $values = Sheets::collection(header: array_map('strtolower', $rows->pull(0)), rows: $rows)->random();
-        return view('landing', ['rows' => $values]);
+        $row = $this->loadSpread('1zsFYBrzDKkXdp4FGdxKM1e0DrK1jyaNAyTEAu8cY_EY')->where('qr_code', $code)->first();
+        abort_if(!$row || !$code, 404);
+        return view('landing', ['row' => $row]);
     }
 
     public function qrCode()
     {
-        return view('qr-code');
+        $rows = $this->loadSpread('1zsFYBrzDKkXdp4FGdxKM1e0DrK1jyaNAyTEAu8cY_EY');
+        $url = config('app.url') . '/' . data_get($rows->random(), 'qr_code');
+        return view('qr-code', ['url' => $url]);
     }
 
-    public function media($media=null)
+    public function loadSpread() 
     {
-        $path = public_path ("image/$media");
-        abort_if(!$media || !File::exists($path), 404);
-    
-        $file = File::get($path);
-        $type = File::mimeType($path);
-    
-        $response =  response()->make($file, 200);
-        $response->header("Content-Type", $type);
-        return $response;
+        $rows = Sheets::spreadsheet('1zsFYBrzDKkXdp4FGdxKM1e0DrK1jyaNAyTEAu8cY_EY')->sheet('Serial Numbers')->get();
+        $spacesWithUnder = array_map(fn($item) => str_replace(' ', '_', $item), $rows->pull(0));
+        return Sheets::collection(header: array_map('strtolower', $spacesWithUnder), rows: $rows);
     }
 }

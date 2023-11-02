@@ -26,9 +26,8 @@
                 <div class="ml-2 self-center">8938526890022</div>
             </div>
         </div>
-
         <div class="bg-white mb-3 py-3 px-3 flex justify-center">
-            <div class="font-semibold text-blue-700 text-base">Serial: {{ data_get($rows, 'prefix') }}-{{ data_get($rows, 'suffix') }}</div>
+            <div class="font-semibold text-blue-700 text-base">Serial: {{ data_get($row, 'prefix') }}-{{ data_get($row, 'suffix') }}</div>
         </div>
 
         <div class="bg-white mb-3 py-3 px-3 flex flex-row">

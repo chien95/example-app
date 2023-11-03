@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Cache;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Revolution\Google\Sheets\Facades\Sheets;
 
@@ -26,8 +27,11 @@ class SpreadController extends Controller
 
     public function loadSpread($spreadId) 
     {
-        $rows = Sheets::spreadsheet($spreadId)->sheet('Serial Numbers')->get();
-        $spacesWithUnder = array_map(fn($item) => str_replace(' ', '_', $item), $rows->pull(0));
-        return Sheets::collection(header: array_map('strtolower', $spacesWithUnder), rows: $rows);
+        return Cache::remember('sheets', 60,function () use ($spreadId) {
+            $rows = Sheets::spreadsheet($spreadId)->sheet('Serial Numbers')->get();
+            $spacesWithUnder = array_map(fn($item) => str_replace(' ', '_', $item), $rows->pull(0));
+            return Sheets::collection(header: array_map('strtolower', $spacesWithUnder), rows: $rows);
+        });
+       
     }
 }

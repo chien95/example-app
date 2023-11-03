@@ -17,4 +17,5 @@ use App\Http\Controllers\SpreadController;
 */
 Route::get('/qr-code', [SpreadController::class, 'qrCode']);
 Route::get('/{code?}', [SpreadController::class, 'index']);
+Route::post('/api/select', [SpreadController::class, 'select2']);
 Route::get('/create/qr-code/{code?}', [SpreadController::class, 'createQrCode']);

@@ -15,14 +15,9 @@
     <div class="h-100 d-flex flex-column align-items-center justify-content-center">
         <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(300)->errorCorrection('H')->generate($url)) !!} ">
         <div class="mt-2 flex">
-           
-            @isset ($rows)
-                <select>
-                    @foreach($rows as $row)
-                        <option @selected($code == data_get($row, 'qr_code')) value="{{ data_get($row, 'qr_code') }}">{{ data_get($row, 'prefix') }}-{{ data_get($row, 'suffix') }}</option>
-                    @endforeach  
-                </select>
-            @endisset
+            @if(Request::is('create/*') )
+                <select></select>
+            @endif
             Quét Mã Qr Code
         </div>
     </div>
@@ -30,15 +25,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
         $("select").select2({
+            delay: 250,
             width: '150px',
             placeholder: "Vui lòng chon mã serial",
-            allowClear: true
-        }).on('change', function (self) {
-            if (!this.value ) {
-                return location.href = `/create/qr-code`
-            }
-            location.href = `/create/qr-code/${this.value}`
-        })
+            allowClear: true,
+            ajax: {
+                url: '/api/select',
+                dataType: 'json',
+                type: 'POST',
+                processResults: function (data) {
+                    return {
+                        results: data.rows.map(function(item)  {
+                            return {
+                                id: `${item.qr_code}`,
+                                text: `${item.prefix}-${item.suffix}`,
+                            }
+                        }),
+                        pagination: {
+                            more: data.pagination
+                        }
+                    }
+                }
+                    
+            },
+            cache: true
+        }).on('change', function (e) {
+            location.href =  "{{  config('app.url')  }}/create/qr-code/" +  this.value
+        });
     </script>
 </body>
 

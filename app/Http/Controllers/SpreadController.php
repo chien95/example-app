@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Google\Service\Transcoder\Input;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
@@ -38,14 +39,23 @@ class SpreadController extends Controller
 
     public function createQrCode($code = null)
     {
-        $rows = $query = $this->loadSpread('1zsFYBrzDKkXdp4FGdxKM1e0DrK1jyaNAyTEAu8cY_EY');
+      
+        $query = $this->loadSpread('1zsFYBrzDKkXdp4FGdxKM1e0DrK1jyaNAyTEAu8cY_EY');
         if($code) $query = $query->where('qr_code', $code);
         $first = $query->first();
-        abort_if(!$first , 404);
-        return view('qr-code', [
-            'code' => $code,
-            'rows' => $rows,
-            'url' => config('app.url') . '/' . data_get($first , 'qr_code')
-        ]);
+        return view('qr-code', ['url' => config('app.url') . '/' . data_get($first , 'qr_code')]);
+    }
+
+    public function select2(Request $request)
+    {
+       
+
+        if (!$request->q) return response()->json(['rows' => []]);
+        $rows = $this->loadSpread('1zsFYBrzDKkXdp4FGdxKM1e0DrK1jyaNAyTEAu8cY_EY')
+            ->filter(fn ($item) => false !== stripos( data_get($item, 'prefix'). "-" . data_get($item, 'suffix'), $request->q))
+            ->splice(($request->page ?? 0) * 10, 10)
+            ->values()
+            ->toArray();
+        return response()->json(['rows' => $rows, 'pagination' => count($rows) > 0]);
     }
 }

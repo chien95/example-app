@@ -15,6 +15,7 @@ class SpreadController extends Controller
         $query = $this->loadSpread('1zsFYBrzDKkXdp4FGdxKM1e0DrK1jyaNAyTEAu8cY_EY');
         if($code) $query = $query->where('qr_code', $code);
         $row = $query->first();
+        abort_if(!$row, 404);
         return view('landing', ['row' => $row]);
     }
 
@@ -33,5 +34,18 @@ class SpreadController extends Controller
             return Sheets::collection(header: array_map('strtolower', $spacesWithUnder), rows: $rows);
         });
        
+    }
+
+    public function createQrCode($code = null)
+    {
+        $rows = $query = $this->loadSpread('1zsFYBrzDKkXdp4FGdxKM1e0DrK1jyaNAyTEAu8cY_EY');
+        if($code) $query = $query->where('qr_code', $code);
+        $first = $query->first();
+        abort_if(!$first , 404);
+        return view('qr-code', [
+            'code' => $code,
+            'rows' => $rows,
+            'url' => config('app.url') . '/' . data_get($first , 'qr_code')
+        ]);
     }
 }

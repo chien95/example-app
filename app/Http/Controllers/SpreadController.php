@@ -11,8 +11,9 @@ class SpreadController extends Controller
 {
     public function index($code = null)
     {
-        $row = $this->loadSpread('1zsFYBrzDKkXdp4FGdxKM1e0DrK1jyaNAyTEAu8cY_EY')->where('qr_code', $code)->first();
-        abort_if(!$row || !$code, 404);
+        $query = $this->loadSpread('1zsFYBrzDKkXdp4FGdxKM1e0DrK1jyaNAyTEAu8cY_EY');
+        if($code) $query = $query->where('qr_code', $code);
+        $row = $query->first();
         return view('landing', ['row' => $row]);
     }
 
@@ -23,9 +24,9 @@ class SpreadController extends Controller
         return view('qr-code', ['url' => $url]);
     }
 
-    public function loadSpread() 
+    public function loadSpread($spreadId) 
     {
-        $rows = Sheets::spreadsheet('1zsFYBrzDKkXdp4FGdxKM1e0DrK1jyaNAyTEAu8cY_EY')->sheet('Serial Numbers')->get();
+        $rows = Sheets::spreadsheet($spreadId)->sheet('Serial Numbers')->get();
         $spacesWithUnder = array_map(fn($item) => str_replace(' ', '_', $item), $rows->pull(0));
         return Sheets::collection(header: array_map('strtolower', $spacesWithUnder), rows: $rows);
     }
